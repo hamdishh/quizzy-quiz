@@ -11,13 +11,13 @@ function startQuiz() {
  // Ensure start screen is hidden once user starts the quiz so only questions will render
 document.getElementById('start-screen').classList.add('hide');
 // Display the first question
-displayQuestion(questions[currentQuestion]);
+showQuestion(questions[currentQuestion]);
     // Start the timer
     startTimer();
   }
   
 // Function to display a question on the screen
-function displayQuestion(question) {
+function showQuestion(question) {
 // Display the question title
     document.getElementById('question-title').textContent = question.question;
  // Showing buttons for the choices of answers
@@ -31,20 +31,45 @@ choicesContainer.appendChild(button);
 
 // Function to check the selected answer
 function checkAnswer(answer) {
-    const currentQuestion = questions[currentQuestion];
-    if (answer === currentQuestion.correctAnswer) {
-// Correct answer
-      score++;
-// Play correct sound if correct
- // Proceed to the next question or end the quiz
-      nextQuestionOrEnd();
+    const currentQuestionObject = questions[currentQuestion];
+    if (answer === currentQuestionObject.correctAnswer) {
+        // Correct answer
+        score++;
+        // Play correct sound if correct
+        const correctSound = document.getElementById('correctSound');
+        correctSound.play();
+        // Proceed to the next question or end the quiz
+        newQuestionOrEnd();
     } else {
-// Incorrect answer
- timeLeft -= 10; // Penalty: Subtract 10 seconds from users guessing time
-// Play incorrect sound if user gets it wrong
-
-// Proceed to the next question or end the quiz
-nextQuestionOrEnd();
+        // Incorrect answer
+        timeRemaining -= 10; // Penalty: Subtract 10 seconds from user's remaining time
+        // Play incorrect sound if user gets it wrong
+        const incorrectSound = document.getElementById('incorrectSound');
+        incorrectSound.play();
+        // Proceed to the next question or end the quiz
+        newQuestionOrEnd();
     }
-  }
-  
+}
+
+//function that enables moving on to the next question or ending the quiz
+
+function newQuestionOrEnd() {
+    currentQuestion++ //move on to next q
+    if (currentQuestion < questions.length) {
+        showQuestion(questions[currentQuestion]); //render next q
+    } else {
+        endQuiz(); //End quiz once all q's are answered
+    }
+}
+
+//call function to end quiz
+function endQuiz() {
+    //Hide questions container and display end screen
+    questionsContainer.classList.add('hide');
+    document.getElementById('end-screen').classList.remove('hide');
+
+    //show final score
+    document.getElementById('final-score').textContent = score;
+}
+  //add an event listener for the start button
+  startButton.addEventListener('click', startQuiz);
