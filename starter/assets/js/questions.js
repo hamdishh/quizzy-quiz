@@ -20,8 +20,8 @@ const questions = [
         correctAnswer: "Parenthesis"
     },
     {
-        question: "?",
-        answers: ["Computer Style Sheets", "Creative Style Sheets", "Cascading Style Sheets", "Colorful Style Sheets"],
-        correctAnswer: "Cascading Style Sheets"
+        question: "Arrays in Javascript can be used to store:",
+        answers: ["Numbers", "Objects", "Strings", "All of the Above"],
+        correctAnswer: "All of the Above"
     },
 ]
