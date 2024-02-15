@@ -1,3 +1,7 @@
+//import questions
+const questions = window.questions
+// console.log(questions);
+
 //definining variables
 const startButton = document.getElementById('start');
 const questionsContainer = document.getElementById('questions');
@@ -8,6 +12,8 @@ let timeRemaining = 60;
 
 //Set function to start the quiz
 function startQuiz() {
+
+
  // Ensure start screen is hidden once user starts the quiz so only questions will render
 document.getElementById('start-screen').classList.add('hide');
 // Display the first question
@@ -60,6 +66,20 @@ function newQuestionOrEnd() {
     } else {
         endQuiz(); //End quiz once all q's are answered
     }
+}
+
+//logic for timer
+function startTimer() {
+    const timerInterval = setInterval(() => {
+        if (timeRemaining > 0) {
+            // Update the timer display
+            document.getElementById('time').textContent = timeRemaining;
+            timeRemaining--; // Decrements the remaining time
+        } else {
+            clearInterval(timerInterval); // Stop the timer if time runs out
+            endQuiz(); // End the quiz
+        }
+    }, 1000); // Update the timer every 1 second converted to 1000 milliseconds
 }
 
 //call function to end quiz
