@@ -1,5 +1,5 @@
 // Make sure questions are already imported from the external script
-
+import questions from "./questions.js"
 
 //defining variables
 const startButton = document.getElementById('start');
@@ -21,6 +21,7 @@ function startQuiz() {
 
 // Function to display a question on the screen
 function showQuestion(question) {
+    console.log('Showing question:', question);
     // Display the question title
     document.getElementById('question-title').textContent = question.question;
     // Showing buttons for the choices of answers
@@ -29,13 +30,19 @@ function showQuestion(question) {
         const button = document.createElement('button');
         button.textContent = answer;
         choicesContainer.appendChild(button);
-    });
+
+ // Attach event listener to each answer button
+ button.addEventListener('click', function() {
+    checkAnswer(answer);
+});
+ });
     // Show the questions container
     questionsContainer.classList.remove('hide');
 }
 
 // Function to check the selected answer
 function checkAnswer(answer) {
+    console.log('Selected answer:', answer);
     const currentQuestionObject = questions[currentQuestion];
     if (answer === currentQuestionObject.correctAnswer) {
         // Correct answer

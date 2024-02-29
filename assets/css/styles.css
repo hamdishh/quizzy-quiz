@@ -1,6 +1,10 @@
 body {
-  font-family: Arial;
+  font-family: Inter, Arial, sans-serif;
   font-size: 120%;
+}
+
+code {
+  font-family: 'Micro 5', Consolas, monospace;
 }
 
 a {
@@ -85,4 +89,25 @@ li:nth-child(odd) {
   position: absolute;
   top: 10px;
   right: 10px;
+}
+
+#highscores-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#highscores-table th,
+#highscores-table td {
+  padding: 10px;
+  border-bottom: 1px solid #dddddd;
+  text-align: left;
+}
+
+#highscores-table th {
+  background-color: #f2f2f2;
+}
+
+#highscores-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
 }

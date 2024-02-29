@@ -1,8 +1,8 @@
 const questions = [
     {
-        question: "Commonly used data types DO NOT  include:",
+        question: "Commonly used data types DO NOT include:",
         answers: ["String", "Alerts", "Boolean", "Numbers"],
-        correctAnswer: "Alert"
+        correctAnswer: "Alerts"
     },
     {
         question: "What does CSS stand for?",
@@ -25,6 +25,5 @@ const questions = [
         correctAnswer: "All of the Above"
     },
 ];
-// console.log(questions);
-//export questions array using a approach thats more compatible witht he broser as module isnt supported
-window.questions = questions;
+
+export default questions;

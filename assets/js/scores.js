@@ -1,32 +1,39 @@
-const highscoresList = document.getElementById('highscores');
-const clearButton = document.getElementById('clear');
+// Retrieve elements from the DOM
+var initialsInput = document.querySelector("#initials");
+var clearHighscoresBtn = document.getElementById("clear");
 
-// Add event listener to the clear button
-clearButton.addEventListener('click', clearScores);
+// Function to display final scores
+function displayFinalScores() {
+  // Retrieve scores and initials from local storage
+  var scores = JSON.parse(localStorage.getItem("scores")) || [];
+  var initials = JSON.parse(localStorage.getItem("initials")) || [];
+  
+  // Access the highscores list element
+  var highscoresList = document.getElementById("highscores");
+
+  // Clear previous highscores
+  highscoresList.innerHTML = "";
+
+  // Iterate through scores and initials to create list items
+  for (var i = 0; i < scores.length; i++) {
+    var listItem = document.createElement("li");
+    listItem.textContent = initials[i] + " - " + scores[i];
+    highscoresList.appendChild(listItem);
+  }
+}
 
 // Function to clear high scores
-function clearScores() {
-    // Clear the highscores list
-    highscoresList.innerHTML = '';
-    // Optionally, you can clear the high scores stored in localStorage or any other storage mechanism
-    localStorage.removeItem('highscores');
+function clearHighscores() {
+  // Clear scores and initials from local storage
+  localStorage.setItem("scores", JSON.stringify([]));
+  localStorage.setItem("initials", JSON.stringify([]));
+
+  // Clear the highscores list
+  document.getElementById("highscores").innerHTML = "";
 }
 
-// Function to display high scores
-function displayHighScores() {
-    // Retrieve high scores from localStorage or any other storage mechanism
-    const highscores = JSON.parse(localStorage.getItem('highscores')) || [];
+// Add event listener to the clear highscores button
+clearHighscoresBtn.addEventListener("click", clearHighscores);
 
-    // Clear the previous high scores
-    highscoresList.innerHTML = '';
-
-    // Populate the highscores list
-    highscores.forEach(score => {
-        const listItem = document.createElement('li');
-        listItem.textContent = score.initials + ' - ' + score.score;
-        highscoresList.appendChild(listItem);
-    });
-}
-
-// Call the function to display high scores when the page loads
-displayHighScores();
+// Call the function to display final scores when the page loads
+displayFinalScores();
